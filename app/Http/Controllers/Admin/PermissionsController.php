@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\DataTables\PermissionsDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\Permission;
+use App\Models\User;
+use App\Notifications\NewPermissionCreatedNotification;
 use Illuminate\Http\Request;
 
 class PermissionsController extends Controller
@@ -43,9 +45,10 @@ class PermissionsController extends Controller
         $this->authorize('create', Permission::class);
         $request->validate([
             'name' => ['required', 'string', 'max:255', 'unique:permissions,name'],
-            'guard_name' => 'nullable',
         ]);
-        Permission::create(['name' => $request->name]);
+        $permission = Permission::create(['name' => $request->name]);
+        $user = User::where('email', '=', 'bahaa2000no@gmail.com')->first();
+        $user->notify(new NewPermissionCreatedNotification($permission));
         return redirect(route('admin.permissions.index'));
     }
 
@@ -89,10 +92,8 @@ class PermissionsController extends Controller
         $this->authorize('update', $permission);
         $request->validate([
             'name' => ['required', 'string', 'max:255', 'unique:permissions,name,'.$id],
-            'guard_name' => 'nullable',
         ]);
-        $guard = $request->guard_name ?? 'web';
-        $permission->update(['name' => $request->name, 'guard_name' => $guard]);
+        $permission->update(['name' => $request->name]);
         return redirect(route('admin.permissions.index'));
     }
 

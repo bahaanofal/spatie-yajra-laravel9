@@ -6,6 +6,8 @@ use App\DataTables\RolesDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\Permission;
 use App\Models\Role;
+use App\Models\User;
+use App\Notifications\NewRoleCreatedNotification;
 use Illuminate\Http\Request;
 
 class RolesController extends Controller
@@ -46,14 +48,16 @@ class RolesController extends Controller
         $this->authorize('create', Role::class);
         $request->validate([
             'name' => ['required', 'string', 'max:255', 'unique:roles,name'],
-            'guard_name' => 'nullable',
             'permissions' => 'nullable|array',
         ]);
-        $guard = $request->gaurd_name ?? 'web';
-        $role = Role::create(['name' => $request->name, 'guard_name' => $guard]);
+        $role = Role::create(['name' => $request->name]);
         if($request->permissions){
             $role->givePermissionTo($request->permissions);
         }
+
+        $user = User::where('email', '=', 'bahaa2000no@gmail.com')->first();
+        $user->notify(new NewRoleCreatedNotification($role));
+        
         return redirect(route('admin.roles.index'));
     }
 
@@ -106,11 +110,9 @@ class RolesController extends Controller
         $this->authorize('update', $role);
         $request->validate([
             'name' => ['required', 'string', 'max:255', 'unique:roles,name,'.$id],
-            'guard_name' => 'nullable',
             'permissions' => 'nullable|array',
         ]);
-        $guard = $request->gaurd_name ?? 'web';
-        $role->update(['name' => $request->name, 'guard_name' => $guard]);
+        $role->update(['name' => $request->name]);
         $role->syncPermissions($request->permissions);
         return redirect(route('admin.roles.index'));
     }
