@@ -1,14 +1,14 @@
 <div class="form-group">
     <div class="mb-4">
-        <label style="color:black" for="name" class="form-label ">Name</label>
-        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name='name' value="{{ old('name', $role->name) }}" placeholder="Role Name">
+        <label style="color:black" for="name" class="form-label ">{{ __('Name') }}</label>
+        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name='name' value="{{ old('name', $role->name) }}" placeholder="{{ __('Role Name') }}">
         @error('name')
         <p class="invalid-feedback">{{ $message }}</p>
         @enderror
     </div>
 </div>
 <div class="form-group col">
-    <h4>Permissions:</h4>
+    <h4>{{ __('Permissions') }}:</h4>
     <div class="mb-4">
         @foreach($permissions as $permission)
         @if(in_array($permission->id, $rolePermissions))
@@ -20,4 +20,4 @@
     </div>
 </div>
 
-<button type="submit" class="btn btn-primary">{{$button}}</button>
+<button type="submit" class="btn btn-primary">{{ __($button) }}</button>

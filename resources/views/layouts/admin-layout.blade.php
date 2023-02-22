@@ -43,7 +43,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="{{route('admin.users.index')}}">
+                <a class="nav-link" href="{{ route('home') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -65,9 +65,9 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="{{route('admin.users.index')}}">Users</a>
-                        <a class="collapse-item" href="{{route('admin.roles.index')}}">Roles</a>
-                        <a class="collapse-item" href="{{route('admin.permissions.index')}}">Permissions</a>
+                        <a class="collapse-item" href="{{route('admin.users.index')}}">{{ __('Users') }}</a>
+                        <a class="collapse-item" href="{{route('admin.roles.index')}}">{{ __('Roles') }}</a>
+                        <a class="collapse-item" href="{{route('admin.permissions.index')}}">{{ __('Permissions') }}</a>
                     </div>
                 </div>
             </li>
@@ -141,7 +141,7 @@
 
             <!-- Sidebar Message -->
             <div class="sidebar-card d-none d-lg-flex">
-                <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
+                <img class="sidebar-card-illustration mb-2" src="{{ asset('assets/img/undraw_rocket.svg') }}" alt="...">
                 <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
                 <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
             </div>
@@ -197,6 +197,53 @@
                                 </form>
                             </div>
                         </li>
+
+
+                        <!-- Nav Item - language -->
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-language fa-fw" style="font-size:24px"></i>
+                            </a>
+                            <!-- Dropdown - Alerts -->
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="languageDropdown">
+                                <h6 class="dropdown-header">
+                                    Language Center
+                                </h6>
+                                @if(Route::currentRouteName() == 'admin.users.edit')
+                                <a class="dropdown-item d-flex align-items-center" href="{{ route(Route::currentRouteName(), [ 'user' => $editedObject, 'locale' => 'en'])}}">
+                                @elseif (Route::currentRouteName() == 'admin.roles.edit')
+                                <a class="dropdown-item d-flex align-items-center" href="{{ route(Route::currentRouteName(), [ 'role' => $editedObject, 'locale' => 'en'])}}">
+                                @elseif (Route::currentRouteName() == 'admin.permissions.edit')
+                                <a class="dropdown-item d-flex align-items-center" href="{{ route(Route::currentRouteName(), [ 'permission' => $editedObject, 'locale' => 'en'])}}">
+                                @else
+                                <a class="dropdown-item d-flex align-items-center" href="{{ route(Route::currentRouteName(), [ 'locale' => 'en'])}}">
+                                @endif    
+                                    <div class="mr-3">
+
+                                    </div>
+                                    <div>
+                                        <span class="font-weight-bold">English</span>
+                                    </div>
+                                </a>
+                                @if(Route::currentRouteName() == 'admin.users.edit')
+                                <a class="dropdown-item d-flex align-items-center" href="{{ route(Route::currentRouteName(), [ 'user' => $editedObject, 'locale' => 'ar'])}}">
+                                @elseif (Route::currentRouteName() == 'admin.roles.edit')
+                                <a class="dropdown-item d-flex align-items-center" href="{{ route(Route::currentRouteName(), [ 'role' => $editedObject, 'locale' => 'ar'])}}">
+                                @elseif (Route::currentRouteName() == 'admin.permissions.edit')
+                                <a class="dropdown-item d-flex align-items-center" href="{{ route(Route::currentRouteName(), [ 'permission' => $editedObject, 'locale' => 'ar'])}}">
+                                @else
+                                <a class="dropdown-item d-flex align-items-center" href="{{ route(Route::currentRouteName(), [ 'locale' => 'ar' ])}}">
+                                @endif
+                                    <div class="mr-3">
+
+                                    </div>
+                                    <div>
+                                        <span class="font-weight-bold">Arabic</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </li>
+
 
                         <!-- Nav Item - Alerts -->
                         <li class="nav-item dropdown no-arrow mx-1">
@@ -261,7 +308,7 @@
                                 </h6>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_1.svg" alt="...">
+                                        <img class="rounded-circle" src="{{ asset('assets/img/undraw_profile_1.svg') }}" alt="...">
                                         <div class="status-indicator bg-success"></div>
                                     </div>
                                     <div class="font-weight-bold">
@@ -272,7 +319,7 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_2.svg" alt="...">
+                                        <img class="rounded-circle" src="{{ asset('assets/img/undraw_profile_2.svg') }}" alt="...">
                                         <div class="status-indicator"></div>
                                     </div>
                                     <div>
@@ -283,7 +330,7 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_3.svg" alt="...">
+                                        <img class="rounded-circle" src="{{ asset('assets/img/undraw_profile_3.svg') }}" alt="...">
                                         <div class="status-indicator bg-warning"></div>
                                     </div>
                                     <div>
@@ -312,8 +359,8 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::user()->name}}</span>
+                                <img class="img-profile rounded-circle" src="{{ asset('assets/img/undraw_profile.svg') }}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -346,11 +393,11 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800">{{$title}}</h1>
-                            <a href="{{ $routeHeadButton }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">{{ $headButton }}</a>
-                            
-                        </div>
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">{{$title}}</h1>
+                        <a href="{{ $routeHeadButton }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">{{ $headButton }}</a>
+
+                    </div>
 
                     <!-- Content Row -->
                     <div class="row">
@@ -440,7 +487,7 @@
                     {{$slot}}
                 </div>
                 <!-- /.container-fluid -->
-                
+
             </div>
             <!-- End of Main Content -->
 

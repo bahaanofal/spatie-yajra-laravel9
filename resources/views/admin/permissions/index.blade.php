@@ -1,7 +1,7 @@
-<x-admin-layout title="Permissions" headButton="Create Permission" :routeHeadButton="route('admin.permissions.create')">
+<x-admin-layout title="{{ __('Permissions') }}" headButton="{{ __('Create Permission') }}" :routeHeadButton="route('admin.permissions.create')">
     <div class="container">
         <div class="card">
-            <div class="card-header">Manage Permissions</div>
+            <div class="card-header">{{ __('Manage Permissions') }}</div>
             <div class="card-body">
                 {{ $dataTable->table() }}
             </div>

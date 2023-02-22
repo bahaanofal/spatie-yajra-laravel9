@@ -1,0 +1,24 @@
+{
+    "Create": "إنشاء",
+    "Name": "الإسم",
+    "Update": "تعديل",
+    "Email": "الإيميل",
+    
+    "Manage Users": "إدارة المستخدمين",
+    "Users": "المستخدمين",
+    "Create User": "إنشاء مستخدم جديد",
+    "Edit User": "تعديل المستخدم",
+    "User Name": "اسم المستخدم",
+
+    "Manage Roles": "إدارة الأدوار",
+    "Roles": "الأدوار",
+    "Role Name": "اسم الدور",
+    "Create Role": "إنشاء دور جديد",
+    "Edit Role": "تعديل الدور",
+
+    "Manage Permissions": "إدارة الصلاحيات",
+    "Permissions": "الصلاحيات",
+    "Permission Name": "اسم الصلاحية",
+    "Create Permission": "إنشاء صلاحية جديدة",
+    "Edit Permission": "تعديل الصلاحية"
+}

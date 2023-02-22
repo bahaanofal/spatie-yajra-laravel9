@@ -9,17 +9,19 @@ class AdminLayout extends Component
     public $title;
     public $routeHeadButton;
     public $headButton;
+    public $editedObject;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($title = 'Title', $routeHeadButton = "route('/dashboard')", $headButton = "Dashboard")
+    public function __construct($title = 'Title', $routeHeadButton = "route('/dashboard')", $headButton = "Dashboard", $editedObject = '')
     {
         $this->title = $title;
         $this->routeHeadButton = $routeHeadButton;
         $this->headButton = $headButton;
+        $this->editedObject = $editedObject;
     }
 
     /**

@@ -5,12 +5,12 @@
         @endforeach
     </div>
 @endif
-<x-admin-layout title="Create Permission" headButton="Permissions" :routeHeadButton="route('admin.permissions.index')">
+<x-admin-layout title="{{ __('Create Permission') }}" headButton="{{ __('Permissions') }}" :routeHeadButton="route('admin.permissions.index')">
 
     <form action="{{ route('admin.permissions.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         @include('admin.permissions._form', [
-            'button' => 'Create'    
+            'button' => "Create"    
         ])
     </form>
 

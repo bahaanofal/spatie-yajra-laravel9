@@ -5,13 +5,13 @@
         @endforeach
     </div>
 @endif
-<x-admin-layout title="Edit Role" headButton="Roles" :routeHeadButton="route('admin.roles.index')">
+<x-admin-layout title="{{ __('Edit Role') }}" editedObject="{{ $role->id }}" headButton="{{ __('Roles') }}" :routeHeadButton="route('admin.roles.index')">
 
     <form action="{{ route('admin.roles.update', $role->id) }}" method="post" enctype="multipart/form-data">
         @csrf
         @method('put')
         @include('admin.roles._form', [
-            'button' => 'Update'    
+            'button' => "Update"    
         ])
     </form>
 

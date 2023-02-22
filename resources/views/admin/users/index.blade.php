@@ -1,7 +1,7 @@
-<x-admin-layout title="Users" headButton="Create User" :routeHeadButton="route('admin.users.create')">
+<x-admin-layout title="{{ __('Users') }}" headButton="{{ __('Create User') }}" :routeHeadButton="route('admin.users.create')">
     <div class="container">
         <div class="card">
-            <div class="card-header">Manage Users</div>
+            <div class="card-header">{{ __('Manage Users') }}</div>
             <div class="card-body">
                 {{ $dataTable->table() }}
             </div>
