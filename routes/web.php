@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\FileManagerController;
 use App\Http\Controllers\Admin\PermissionsController;
 use App\Http\Controllers\Admin\RolesController;
 use App\Http\Controllers\Admin\UsersController;
@@ -29,9 +30,9 @@ Route::middleware(['auth', 'role:super_admin|admin'])
         Route::resource('/users', UsersController::class);
         Route::resource('/roles', RolesController::class);
         Route::resource('/permissions', PermissionsController::class);
+        Route::get('/filemanager', [FileManagerController::class, 'index']);
     });
 // Route::resource('/admin/users', UsersController::class)->middleware(['auth', 'role:super_admin|admin']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes();
-
