@@ -96,16 +96,16 @@ class UsersDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('id'),
-            Column::make('name'),
-            Column::make('email'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
-            Column::computed('edit')
+            Column::make('id')->title(__('Id')),
+            Column::make('name')->title(__('Name')),
+            Column::make('email')->title(__('Email')),
+            Column::make('created_at')->title(__('Created At')),
+            Column::make('updated_at')->title(__('Updated At')),
+            Column::computed('edit')->title(__('Edit'))
                 ->exportable(false)
                 ->printable(false)
                 ->width(60),
-            Column::computed('delete')
+            Column::computed('delete')->title(__('Delete'))
                 ->exportable(false)
                 ->printable(false)
                 ->width(60),

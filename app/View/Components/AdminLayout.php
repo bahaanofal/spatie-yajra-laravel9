@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use Illuminate\Support\Facades\Route;
 use Illuminate\View\Component;
 
 class AdminLayout extends Component
@@ -16,7 +17,7 @@ class AdminLayout extends Component
      *
      * @return void
      */
-    public function __construct($title = 'Title', $routeHeadButton = "route('/dashboard')", $headButton = "Dashboard", $editedObject = '')
+    public function __construct($title = 'Title', $routeHeadButton = '/home', $headButton = "Dashboard", $editedObject = '')
     {
         $this->title = $title;
         $this->routeHeadButton = $routeHeadButton;

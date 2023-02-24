@@ -12,6 +12,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UsersController extends Controller
 {
@@ -59,21 +60,35 @@ class UsersController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
+            'image_path' => 'nullable|image',
             'roles' => 'nullable|array',
             'permissions' => 'nullable|array',
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
+        $request->merge([
             'password' => Hash::make('password'),
         ]);
+
+        $data = $request->all();
+        $user = User::create($data);
+
+        $image_path = null;
+        if ($request->hasFile('image_path')) {
+            $file = $request->file('image_path');
+            $image_path = $file->storeAs('users/images', $user->id . '.' . $file->getClientOriginalExtension() , [
+                'disk' => 'public'
+            ]);
+            $data['image_path'] = $image_path;
+        }
+
+        $user->update($data);
+
         event(new Registered($user));
         $user->assignRole($request->roles);
         $user->givePermissionTo($request->permissions);
 
         $resevedUser = User::where('email', '=', 'bahaa2000no@gmail.com')->first();
-        $user->notify(new NewUserCreatedNotification($user));
+        $resevedUser->notify(new NewUserCreatedNotification($user));
 
         return redirect(route('admin.users.index'));
     }
@@ -133,11 +148,23 @@ class UsersController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $id],
+            'image_path' => 'nullable|image',
             'roles' => 'nullable|array',
             'permissions' => 'nullable|array',
         ]);
 
-        $user->update($request->all());
+        $data = $request->all();
+
+        $image_path = null;
+        if ($request->hasFile('image_path')) {
+            $file = $request->file('image_path');
+            $image_path = $file->storeAs('users/images', $user->id . '.' . $file->getClientOriginalExtension(), [
+                'disk' => 'public'
+            ]);
+            $data['image_path'] = $image_path;
+        }
+
+        $user->update($data);
         $user->syncRoles($request->roles);
         $user->syncPermissions($request->permissions);
         return redirect(route('admin.users.index'));
@@ -154,6 +181,7 @@ class UsersController extends Controller
         $user = User::findOrFail($id);
         $this->authorize('delete', $user);
         $user->delete();
+        Storage::disk('public')->delete($user->image_path);
         return redirect(route('admin.users.index'));
     }
 }

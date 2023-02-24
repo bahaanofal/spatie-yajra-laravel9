@@ -1,7 +1,8 @@
 {
     "Create": "إنشاء",
-    "Name": "الإسم",
     "Update": "تعديل",
+
+    "Name": "الإسم",
     "Email": "الإيميل",
     
     "Manage Users": "إدارة المستخدمين",
@@ -20,5 +21,17 @@
     "Permissions": "الصلاحيات",
     "Permission Name": "اسم الصلاحية",
     "Create Permission": "إنشاء صلاحية جديدة",
-    "Edit Permission": "تعديل الصلاحية"
+    "Edit Permission": "تعديل الصلاحية",
+
+    "File Manager": "إدارة الملفات",
+    
+    "Id": "المعرف",
+    "Created At": "تاريخ الإنشاء",
+    "Updated At": "آخر تعديل",
+    "Edit": "تعديل",
+    "Delete": "حذف",
+    "buttons": {
+        "Reload": "تحديث",
+        "print": "طباعة"
+    }
 }

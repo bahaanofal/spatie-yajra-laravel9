@@ -17,6 +17,17 @@
     </div>
 </div>
 
+<div class="mb-4">
+    <label style="color:black" for="image_path" class="form-label ">Image</label><br>
+    @if($user->image_path)
+    <img src="{{ asset('storage/' . $user->image_path) }}" width="200" alt="">
+    @endif
+    <input type="file" class="form-control @error('image_path') is-invalid @enderror" id="image_path" name='image_path' >
+    @error('image_path')
+    <p class="invalid-feedback">{{ $message }}</p>
+    @enderror
+</div>
+
 <div class="row">
     <div class="form-group col">
         <h4>{{ __('Roles') }} :</h4>
